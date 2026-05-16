@@ -20,13 +20,14 @@ import { cn, formatDate, formatRelative, isOverdue } from "@/lib/utils";
 
 export default function TaskDetailPage() {
   const params = useParams<{ id: string }>();
+  const id = params?.id ?? "";
   const router = useRouter();
-  const { data: task, isLoading } = useTask(params.id);
-  const { data: comments } = useTaskComments(params.id);
-  const addComment = useAddComment(params.id);
-  const deleteComment = useDeleteComment(params.id);
+  const { data: task, isLoading } = useTask(id);
+  const { data: comments } = useTaskComments(id);
+  const addComment = useAddComment(id);
+  const deleteComment = useDeleteComment(id);
   const deleteTask = useDeleteTask();
-  const uploadAttachment = useUploadTaskAttachment(params.id);
+  const uploadAttachment = useUploadTaskAttachment(id);
   const user = useAuthStore((s) => s.user);
 
   const [comment, setComment] = useState("");

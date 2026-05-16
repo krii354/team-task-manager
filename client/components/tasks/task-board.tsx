@@ -31,7 +31,6 @@ interface Props {
 export function TaskBoard({ projectId }: Props) {
   const qc = useQueryClient();
   const { data, isLoading } = useTasks({ projectId, pageSize: 200 });
-  const tasks = data?.items ?? [];
 
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [open, setOpen] = useState(false);
@@ -44,11 +43,12 @@ export function TaskBoard({ projectId }: Props) {
   );
 
   const columns: Record<TaskStatus, Task[]> = useMemo(() => {
+    const tasks = data?.items ?? [];
     const map: Record<TaskStatus, Task[]> = { TODO: [], IN_PROGRESS: [], REVIEW: [], COMPLETED: [] };
     for (const t of tasks) map[t.status].push(t);
     Object.values(map).forEach((list) => list.sort((a, b) => a.order - b.order));
     return map;
-  }, [tasks]);
+  }, [data?.items]);
 
   function onDragStart(e: DragStartEvent) {
     const task = (e.active.data.current as { task?: Task })?.task ?? null;

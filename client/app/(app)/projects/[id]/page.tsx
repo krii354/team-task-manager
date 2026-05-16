@@ -20,15 +20,16 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "
 
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
+  const id = params?.id ?? "";
   const router = useRouter();
-  const { data: project, isLoading } = useProject(params.id);
+  const { data: project, isLoading } = useProject(id);
   const user = useAuthStore((s) => s.user);
   const isAdmin = user?.role === "ADMIN";
   const canManage = isAdmin || project?.ownerId === user?.id;
   const [editOpen, setEditOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const removeMember = useRemoveProjectMember(params.id);
+  const removeMember = useRemoveProjectMember(id);
   const deleteProject = useDeleteProject();
 
   if (isLoading || !project) {

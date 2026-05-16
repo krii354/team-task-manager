@@ -19,7 +19,7 @@ import type { TaskPriority, TaskStatus } from "@/lib/types";
 
 export default function TasksPage() {
   const params = useSearchParams();
-  const initialSearch = params.get("search") ?? "";
+  const initialSearch = params?.get("search") ?? "";
 
   const [search, setSearch] = useState(initialSearch);
   const [status, setStatus] = useState<TaskStatus | "ALL">("ALL");

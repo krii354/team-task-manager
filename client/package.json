@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start -p 3000",
     "lint": "next lint",
-    "test": "jest --passWithNoTests"
+    "test": "cross-env NODE_ENV=test jest --passWithNoTests"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
@@ -54,6 +54,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.14",
+    "cross-env": "^7.0.3",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

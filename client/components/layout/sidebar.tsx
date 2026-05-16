@@ -17,7 +17,7 @@ const navItems = [
 const adminNavItems = [{ href: "/settings/team", icon: Users, label: "Team", adminOnly: true }];
 
 export function Sidebar({ collapsed }: { collapsed: boolean }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const user = useAuthStore((s) => s.user);
   const isAdmin = user?.role === "ADMIN";
 
