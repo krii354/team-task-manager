@@ -1,0 +1,45 @@
+{
+  "name": "team-task-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-grade Team Task Manager — single-service full-stack app (Next.js 14 + Express + Prisma + PostgreSQL)",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "go": "node scripts/bootstrap.mjs",
+    "setup": "node scripts/bootstrap.mjs --no-dev",
+    "dev": "concurrently -k -n SERVER,CLIENT -c blue,magenta \"npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
+    "build": "npm run prisma:generate && npm run build:client && npm run build:server",
+    "build:client": "npm run build --workspace=client",
+    "build:server": "npm run build --workspace=server",
+    "start": "npm run db:deploy --workspace=server && cross-env NODE_ENV=production node server/dist/index.js",
+    "start:no-migrate": "cross-env NODE_ENV=production node server/dist/index.js",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "prisma:generate": "npm run db:generate --workspace=server",
+    "db:migrate": "npm run db:migrate --workspace=server",
+    "db:deploy": "npm run db:deploy --workspace=server",
+    "db:seed": "npm run db:seed --workspace=server",
+    "db:studio": "npm run db:studio --workspace=server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "keywords": [
+    "task-manager",
+    "project-management",
+    "kanban",
+    "nextjs",
+    "express",
+    "prisma",
+    "typescript",
+    "railway"
+  ],
+  "license": "MIT"
+}
