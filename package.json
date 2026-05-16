@@ -14,7 +14,7 @@
     "build": "npm run prisma:generate && npm run build:client && npm run build:server",
     "build:client": "npm run build --workspace=client",
     "build:server": "npm run build --workspace=server",
-    "start": "npm run db:deploy --workspace=server && cross-env NODE_ENV=production node server/dist/index.js",
+    "start": "npm run db:sync --workspace=server && cross-env NODE_ENV=production node server/dist/index.js",
     "start:no-migrate": "cross-env NODE_ENV=production node server/dist/index.js",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",

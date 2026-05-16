@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+export const dynamic = "force-dynamic";
+
 export default function UnauthorizedPage() {
   return (
     <div className="grid min-h-screen place-items-center bg-background p-6">
