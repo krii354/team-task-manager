@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   keywords: ["task manager", "project management", "kanban", "team collaboration"],
 };
 
+// Render every route at request time — never statically prerender.
+// The whole app is authenticated and client-driven (React Query, Zustand,
+// framer-motion, next-themes), so build-time prerendering has nothing to gain
+// and actively fails with `useContext` returning null + the legacy `<Html>`
+// fallback when prerender errors out.
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
